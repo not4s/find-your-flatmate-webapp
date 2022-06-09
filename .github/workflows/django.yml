@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Ignoring Engines
       run: |
-        yarn config set ignore-engines true
+        yarn install --ignore-engines
     - name: Run Tests
       run: |
         python manage.py test
