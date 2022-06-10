@@ -1,4 +1,4 @@
-# Finding the Ideal Room-mate
+# Finding the Ideal Flat-mate
 Status - In development
 
 ## Introduction
