@@ -38,3 +38,6 @@ def homepage(request):
     # }
     return render(request, 'homepage.html')
 
+def accepted(request):
+    return render(request, 'accepted.html')
+
