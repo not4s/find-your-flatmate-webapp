@@ -15,7 +15,7 @@ The application is built using:
 * HTML, CSS, and Javascript 
 * It is run on the Heroku platform.
 
-## Lauch
+## Launch
 Find the application here: [F-inder](https://find-your-flatmate-webapp.herokuapp.com/home/)
 
 ## Features
