@@ -1,0 +1,12 @@
+For any external source file images/javascript/css 
+NEED TO change the file path as the following for django
+<img src = "{% static 'img.jpg' %}">
+<img src = "{% static 'css.css' %}">
+<img src = "{% static 'javascript.js' %}">
+
+And at the first line of any template (html file)
+ADD 
+{% load static %}
+
+If you're running Django 3 and were on an older version before, you need to replace:
+{% load static from staticfiles %} or {% load staticfiles %} with just: {% load static %}
