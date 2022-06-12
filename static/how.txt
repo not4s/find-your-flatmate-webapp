@@ -1,4 +1,7 @@
-For any external source file images/javascript/css 
+Save any external source file (images/javascript/css or etc)
+under the corresponding folder in the 'static' directory
+
+For any external source file (images/javascript/css or etc)
 NEED TO change the file path as the following for django
 <img src = "{% static 'img.jpg' %}">
 <img src = "{% static 'css.css' %}">
