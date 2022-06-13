@@ -1,9 +1,5 @@
 from django.db import models
 
-class Profile(models.Model):
-    name = models.CharField(max_length=200)
-    preference = models.CharField(max_length=200)
-
 class QuesModel(models.Model):
     question = models.CharField(max_length=200,null=True)
     op1 = models.CharField(max_length=200,null=True)
