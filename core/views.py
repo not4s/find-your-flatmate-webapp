@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from profiles.models import Profile
 
+@login_required(login_url='signin')
 def index(request):
     return HttpResponse("<h1>Find Your Flatmate!</h1>")
 
