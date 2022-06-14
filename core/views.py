@@ -1,12 +1,13 @@
 from ast import Pass
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.http import HttpResponse
 from profiles.models import Profile
 
 def index(request):
-    return HttpResponse("<h1>Find Your Flatmate!</h1>")
+    return render(request, 'index.html')
 
 def signup(request):
 
@@ -50,7 +51,7 @@ def signup(request):
 
 def signin(request):
 
-    if request == 'POST':
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
@@ -60,7 +61,12 @@ def signin(request):
             return redirect('/')
         else:
             messages.info(request, 'Credentials Invalid')
-            return redirect('/')
+            return redirect('signin')
             
     else:
         return render(request, 'signin.html')
+
+@login_required(login_url='signin')
+def logout(request):
+    auth.logout(request)
+    return redirect('signin')
