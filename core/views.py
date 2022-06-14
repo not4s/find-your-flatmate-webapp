@@ -9,6 +9,7 @@ def index(request):
     return HttpResponse("<h1>Find Your Flatmate!</h1>")
 
 def signup(request):
+
     if request.method == "POST":
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
@@ -44,6 +45,22 @@ def signup(request):
                 new_profile.save()
                 # TODO: Change redirection to the login page once login is done
                 return redirect('signup')
-            
     else:
         return render(request, 'signup.html')
+
+def signin(request):
+
+    if request == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Credentials Invalid')
+            return redirect('/')
+            
+    else:
+        return render(request, 'signin.html')
