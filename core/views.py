@@ -1,4 +1,3 @@
-from ast import Pass
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
@@ -36,7 +35,9 @@ def signup(request):
                                                 password=password)
                 user.save()
 
-                # TODO: Log user in and redirect to settings page
+                # Log user in and redirect to settings page
+                user_login = auth.authenticate(username=username, password=password)
+                auth.login(request, user_login)
 
                 # Create a Profile object for the new user
                 user_model = User.objects.get(username=username)
@@ -45,8 +46,7 @@ def signup(request):
                                                      firstname=firstname,
                                                      lastname=lastname)
                 new_profile.save()
-                # TODO: Change redirection to the login page once login is done
-                return redirect('signup')
+                return redirect('profile/settings')
     else:
         return render(request, 'signup.html')
 
