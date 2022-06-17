@@ -36,10 +36,10 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default_profile.jpeg', upload_to='profile_pics')
     about_me = models.TextField(blank=True, null=True)
     search_location = models.CharField(max_length=30, blank=True, null=True, choices=location_choice)
     studies_at = models.CharField(max_length=30, blank=True, null=True, choices=studies_at_choice)
+    image = models.ImageField(default='default_profile.jpeg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'
