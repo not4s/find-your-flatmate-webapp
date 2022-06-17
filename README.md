@@ -19,7 +19,7 @@ The application is built using:
 Find the application here: [F-inder](https://find-your-flatmate-webapp.herokuapp.com/home/)
 
 ## Features
-* ehmm.. we'll get back to you
+* 
 ### TODO
 * Simple, clean, and professional UI 
 * Account system to manage requests
