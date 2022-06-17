@@ -32,9 +32,9 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
-    'myapp',
-    'profiles',
+    'core.apps.CoreConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'flatmate_finder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,6 +128,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
