@@ -7,7 +7,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
+from .models import Post, Report
 
 
 def home(request):
@@ -61,3 +61,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+class ReportCreateView(LoginRequiredMixin, CreateView):
+    model = Report
+    template_name = 'core/report.html'
+    fields = ['username_to_report', 'details']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

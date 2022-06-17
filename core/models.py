@@ -15,3 +15,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+class Report(models.Model):
+    username_to_report = models.CharField(max_length=100)
+    details = models.TextField()
