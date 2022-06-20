@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -9,6 +10,8 @@ from django.views.generic import (
 )
 from .models import Post, Report
 
+def index(request):
+    return HttpResponse('<h1>Hello World!</h1>')
 
 def home(request):
     context = {
