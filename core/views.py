@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -7,7 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post, Report
+from .models import Post, Report, Quiz
 
 
 def home(request):
@@ -18,7 +19,22 @@ def home(request):
 
 def quiz(request):
     if request.method == 'POST':
-        pass
+        sleep = request.POST['sleep']
+        cook = request.POST['cook']
+        loner = request.POST['loner']
+
+        quiz = Quiz.objects.create(
+            sleep=sleep,
+            cook=cook,
+            loner=loner
+        )
+        quiz.save()
+
+        context = {
+            'quiz' : quiz.pk
+        }
+
+        return render(request, 'core/post_form.html', context)
     
     return render(request, 'core/quiz.html')
 
