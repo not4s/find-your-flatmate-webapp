@@ -16,6 +16,11 @@ def home(request):
     }
     return render(request, 'core/home.html', context)
 
+def quiz(request):
+    if request.method == 'POST':
+        pass
+    
+    return render(request, 'core/quiz.html')
 
 class PostListView(ListView):
     model = Post
