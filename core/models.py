@@ -4,18 +4,42 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-class Quiz(models.Model):
-    sleep = models.IntegerField()
-    cook  = models.IntegerField()
-    loner = models.IntegerField()
+# class Quiz(models.Model):
+#     sleep_choice = (
+#         (1, '21:00'),
+#         (2, '22:00'),
+#         (3, '23:00'),
+#         (4, '24:00+'),
+#     )
+
+#     cook_choice = (
+#         (1, '0'),
+#         (2, '1-2'),
+#         (3, '3-4'),
+#         (4, '5+'),
+#     )
+
+#     loner_choice = (
+#         (1, 'None'),
+#         (2, 'Once per week'),
+#         (3, '2-4 times per week'),
+#         (4, 'A lot'),
+#     )
+
+#     sleep = models.IntegerField(choices=sleep_choice)
+#     cook  = models.IntegerField(choices=cook_choice)
+#     loner = models.IntegerField(choices=loner_choice)
+
+#     def get_absolute_url(self):
+#         return reverse('post-detail', kwargs={'pk': Post.objects.last().pk})
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    quizDone = models.BooleanField(default=False)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, blank=True, null=True)
+    # quizDone = models.BooleanField(default=False)
+    # quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, blank=True, null=True)
 
     MONTHS = (
         ('1', 'Jan'),
@@ -45,6 +69,32 @@ class Post(models.Model):
     end_year = models.CharField(max_length=4, choices=YEARS, default=2022)
     location = models.CharField(max_length=20, default="")
     budget = models.IntegerField(max_length=3, default=0)
+
+
+    sleep_choice = (
+        (1, '21:00'),
+        (2, '22:00'),
+        (3, '23:00'),
+        (4, '24:00+'),
+    )
+
+    cook_choice = (
+        (1, '0'),
+        (2, '1-2'),
+        (3, '3-4'),
+        (4, '5+'),
+    )
+
+    loner_choice = (
+        (1, 'None'),
+        (2, 'Once per week'),
+        (3, '2-4 times per week'),
+        (4, 'A lot'),
+    )
+
+    what_time_do_you_go_to_sleep = models.IntegerField(choices=sleep_choice, blank=True, null=True)
+    how_often_do_you_cook_per_week = models.IntegerField(choices=cook_choice, blank=True, null=True)
+    how_often_do_you_meet_friends_per_week = models.IntegerField(choices=loner_choice, blank=True, null=True)
 
     def __str__(self):
         return self.title

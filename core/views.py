@@ -1,5 +1,5 @@
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -8,7 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post, Report, Quiz
+from .models import Post, Report
 
 
 def home(request):
@@ -19,24 +19,32 @@ def home(request):
 
 def quiz(request):
     if request.method == 'POST':
-        sleep = request.POST['sleep']
-        cook = request.POST['cook']
-        loner = request.POST['loner']
+        sleep = request.POST.get('sleep', None)
+        cook = request.POST.get('cook', None)
+        loner = request.POST.get('loner', None)
+
+        print(sleep)
+        print(cook)
+        print(loner)
 
         quiz = Quiz.objects.create(
             sleep=sleep,
             cook=cook,
-            loner=loner
+            loner=loner,
         )
+
         quiz.save()
 
-        context = {
-            'quiz' : quiz.pk
-        }
+        print(request.path)
 
-        return render(request, 'core/post_form.html', context)
+        return redirect("home")
     
     return render(request, 'core/quiz.html')
+
+
+# class QuizView(CreateView):
+#     model = Quiz
+#     fields = ['sleep', 'cook', 'loner']
 
 class PostListView(ListView):
     model = Post
@@ -51,7 +59,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'start_year', 'start_month', 'end_year', 'end_month', 'budget', 'location']
+    fields = ['title', 'content', 'start_year', 'start_month', 'end_year', 'end_month', 'budget', 'location', "what_time_do_you_go_to_sleep", "how_often_do_you_cook_per_week", "how_often_do_you_meet_friends_per_week"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
