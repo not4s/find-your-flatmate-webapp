@@ -28,10 +28,10 @@ jobs:
     - name: Ignoring Engines
       run: |
         yarn install --ignore-engines
-    - name: Migrating database
-      run: |
-        python manage.py makemigrations
-        python manage.py migrate
+    # - name: Migrating database
+    #   run: |
+    #     python manage.py makemigrations
+    #     python manage.py migrate
     - name: Run Tests
       run: |
         python manage.py test
