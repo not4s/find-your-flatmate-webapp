@@ -11,8 +11,8 @@ from django.views.generic import (
 )
 from .models import Post, Report
 
-def index(request):
-    return HttpResponse('<h1>Hello World!</h1>')
+# def index(request):
+#     return HttpResponse('<h1>Hello World!</h1>')
 
 def home(request):
     context = {
@@ -65,7 +65,25 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'start_year', 'start_month', 'end_year', 'end_month', 'budget', 'location', "what_time_do_you_go_to_sleep", "how_often_do_you_cook_per_week", "how_often_do_you_meet_friends_per_week"]
+    fields = [
+        'title', 
+        'content', 
+        'start_year', 
+        'start_month', 
+        'end_year', 
+        'end_month', 
+        'budget', 
+        'location', 
+        "what_time_do_you_go_to_sleep", 
+        "how_often_do_you_cook_per_week", 
+        "how_often_do_you_meet_friends_per_week",
+        "how_often_do_you_think_you_will_bring_other_people_into_the_flat",
+        "when_do_you_usually_return_to_the_flat",
+        "how_often_do_you_drink_alcohol",
+
+        "when_do_you_shower",
+        "how_often_do_you_shop_for_groceries",
+        "how_often_do_you_do_chores"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

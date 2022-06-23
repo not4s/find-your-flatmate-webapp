@@ -92,9 +92,52 @@ class Post(models.Model):
         (4, 'A lot'),
     )
 
+    visit_choice = (
+        (1, "Never"),  
+        (2, "Around once a month"), 
+        (3, "Once a week"), 
+        (4, "More than once a week")
+    )
+
+    back_choice = (
+        (1, "Afternoon"),  
+        (2, "Evening"), 
+        (3, "Late at night"), 
+        (4, "Morning")
+    )
+
+    shower_choice = (
+        (1, "Morning"),
+        (2, "Noon"),
+        (3, "Evening"),
+        (4, "Right before bed")
+    )
+
+    groceries_choice = (
+        (1, "Once per week"),
+        (2, "2-3 times per week"),
+        (3, "4-5 times per week"),
+        (4, "Basically every day")
+    )
+
+    alcohol_choice = (
+        (1, "I don't drink"),
+        (2, "1-2 times per week"),
+        (3, "4-5 times per week"),
+        (4, "Basically every day")
+    )
+
     what_time_do_you_go_to_sleep = models.IntegerField(choices=sleep_choice, blank=True, null=True)
     how_often_do_you_cook_per_week = models.IntegerField(choices=cook_choice, blank=True, null=True)
     how_often_do_you_meet_friends_per_week = models.IntegerField(choices=loner_choice, blank=True, null=True)
+    how_often_do_you_think_you_will_bring_other_people_into_the_flat = models.IntegerField(choices=visit_choice, blank=True, null=True)
+    when_do_you_usually_return_to_the_flat = models.IntegerField(choices=back_choice, blank=True, null=True)
+    how_often_do_you_drink_alcohol = models.IntegerField(choices=alcohol_choice, blank=True, null=True)
+    
+    when_do_you_shower = models.IntegerField(choices=shower_choice, blank=True, null=True)
+    how_often_do_you_shop_for_groceries = models.IntegerField(choices=groceries_choice, blank=True, null=True)
+    how_often_do_you_do_chores = models.IntegerField(choices=groceries_choice, blank=True, null=True)
+
 
     def __str__(self):
         return self.title
