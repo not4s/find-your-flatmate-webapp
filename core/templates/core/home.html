@@ -9,7 +9,8 @@
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <!-- <p class="article-content">{{ post.content }}</p> -->
+            <!-- <h3><a class="article-title" href="{% url 'post-detail' post.id %}">£{{ post.budget }}</a></h3> -->
+            <p class="article-content">Budget £{{ post.budget }} at {{ post.location }}</p>
           </div>
         </article>
     {% endfor %}
