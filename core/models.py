@@ -130,7 +130,7 @@ class Post(models.Model):
     what_time_do_you_go_to_sleep = models.IntegerField(choices=sleep_choice, blank=True, null=True)
     how_often_do_you_cook_per_week = models.IntegerField(choices=cook_choice, blank=True, null=True)
     how_often_do_you_meet_friends_per_week = models.IntegerField(choices=loner_choice, blank=True, null=True)
-    how_often_do_you_think_you_will_bring_other_people_into_the_flat = models.IntegerField(choices=visit_choice, blank=True, null=True)
+    how_often_do_you_have_visitors = models.IntegerField(choices=visit_choice, blank=True, null=True)
     when_do_you_usually_return_to_the_flat = models.IntegerField(choices=back_choice, blank=True, null=True)
     how_often_do_you_drink_alcohol = models.IntegerField(choices=alcohol_choice, blank=True, null=True)
     
