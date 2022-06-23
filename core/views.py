@@ -9,6 +9,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post, Report
+# from .filters import PostFilter
 
 def index(request):
     return HttpResponse('<h1>Hello World!</h1>')
@@ -25,6 +26,8 @@ class PostListView(ListView):
     template_name = 'core/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+
+    paginate_by = 10
 
 
 class PostDetailView(DetailView):
