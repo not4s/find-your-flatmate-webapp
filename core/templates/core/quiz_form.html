@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Lifestyle Quiz</legend>
+                {{ form|crispy }}
+            </fieldset>
+            
+            <!-- This is where the questions come in. It would probably be a 
+            good idea to write a system that you can just plug questions into
+            so that this script can read from them. -->
+
+            <!-- <div class="form-group">
+                <label for="sleep" id="sleep-label">
+                    At what time do you sleep?
+                </label>
+            </div>
+     
+            <div class="form-group">
+                <select name="sleep" id="sleep-id">
+                    <option value=1>21:00</option>
+                    <option value=2>22:00</option>
+                    <option value=3>23:00</option>
+                    <option value=4>Later</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="cook" id="cook-label">
+                    How many times per week do you use the kitchen?
+                </label>
+            </div>
+     
+            <div class="form-group">
+                <select name="cook" id="cook-id">
+                    <option value=1>0</option>
+                    <option value=2>1-2</option>
+                    <option value=3>3-4</option>
+                    <option value=4>5+</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="loner" id="loner-label">
+                    How much time would you like to spend with your flatmate(s)?
+                </label>
+            </div>
+     
+            <div class="form-group">
+                <select name="loner" id="loner-id">
+                    <option value=1>None</option>
+                    <option value=2>1 evening per week</option>
+                    <option value=3>2-4 evenings per week</option>
+                    <option value=4>A lot</option>
+                </select>
+            </div> -->
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+
+        <!-- <form method="POST">
+            {% csrf_token %}
+            
+        </form> -->
+    </div>
+{% endblock content %}
