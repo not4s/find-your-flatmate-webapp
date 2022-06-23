@@ -6,7 +6,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 from .models import Post, Report
 
@@ -16,6 +16,9 @@ def home(request):
         'posts': Post.objects.all()
     }
     return render(request, 'core/home.html', context)
+
+def faq(request):
+    return render(request, 'core/faq.html')
 
 def quiz(request):
     if request.method == 'POST':
@@ -99,3 +102,9 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class FaqView(LoginRequiredMixin, CreateView):
+    model = Report
+    template_name = 'core/faq.html'
+    fields = ['username_to_report', 'details']
