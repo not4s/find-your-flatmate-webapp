@@ -77,7 +77,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         "what_time_do_you_go_to_sleep", 
         "how_often_do_you_cook_per_week", 
         "how_often_do_you_meet_friends_per_week",
-        "how_often_do_you_think_you_will_bring_other_people_into_the_flat",
+        "how_often_do_you_have_visitors",
         "when_do_you_usually_return_to_the_flat",
         "how_often_do_you_drink_alcohol",
 
