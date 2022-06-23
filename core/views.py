@@ -22,7 +22,7 @@ def home(request):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'core/home.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'core/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
 
@@ -73,3 +73,11 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+def search_result(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        posts = Post.objects.filter(title__contains=searched)
+        return render(request, 'core/search_result.html', {'searched':searched, 'posts':posts})
+    else:
+        return render(request, 'core/search_result.html', {})
