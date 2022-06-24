@@ -53,7 +53,7 @@ class Post(models.Model):
         ('2000-3000', '£2000-3000'),
         ('3000+', '£3000+')
     )
-
+    
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(default=date.today)
     search_location = models.CharField(max_length=30, blank=True, null=True, choices=location_choice)
