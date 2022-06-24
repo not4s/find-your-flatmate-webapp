@@ -1,6 +1,42 @@
 {% extends "core/base.html" %}
+{% load widget_tweaks %}
 {% block content %}
-    {% for post in posts %}
+<div class="container">
+
+
+  <form method="GET">
+    <div class="well">
+      <h4 style="margin-top: 0">Post Filter</h4>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          {{ filter.form.start_date.label_tag }}
+          {% render_field filter.form.start_date class="form-control" %}
+        </div>
+        <div class="form-group col-sm-6">
+          {{ filter.form.end_date.label_tag }}
+          {% render_field filter.form.end_date class="form-control" %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          {{ filter.form.search_location.label_tag }}
+          {% render_field filter.form.search_location class="form-control" %}
+        </div>
+        <div class="form-group col-sm-5">
+          {{ filter.form.studies_at.label_tag }}
+          {% render_field filter.form.studies_at class="form-control" %}
+        </div>
+        <div class="form-group col-sm-3">
+          {{ filter.form.budget.label_tag }}
+          {% render_field filter.form.budget class="form-control" %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form><br/>
+
+
+    {% for post in filter.qs %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
           <div class="media-body">
@@ -8,10 +44,13 @@
               <a class="mr-2" href="#">{{ post.author }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <h5><b><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></b></h5>
+            <h6 style="color:rgb(105, 138, 205);">Details : <b>{{ post.start_date }}</b> ~ <b>{{ post.end_date }}</b> at <b>{{ post.search_location }}</b></h6>
+            <h6 style="color:rgb(105, 138, 205);">Budget : <b>£{{ post.budget }}</b></h6>
             <!-- <p class="article-content">{{ post.content }}</p> -->
             <p class="article-content">Budget £{{ post.budget }} at {{ post.location }}</p>
           </div>
         </article>
     {% endfor %}
+</div>
 {% endblock content %}
