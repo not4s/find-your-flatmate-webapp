@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
-    'crispy_forms',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_filters'
+    'crispy_forms',
+    'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
