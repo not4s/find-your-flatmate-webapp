@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import date
 
 
 class Post(models.Model):
@@ -53,6 +54,8 @@ class Post(models.Model):
         ('3000+', '3000+')
     )
 
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
     search_location = models.CharField(max_length=30, blank=True, null=True, choices=location_choice)
     studies_at = models.CharField(max_length=30, blank=True, null=True, choices=studies_at_choice)
     budget = models.CharField(max_length=30, blank=True, null=True, choices=budget_choice)
