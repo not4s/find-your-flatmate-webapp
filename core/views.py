@@ -80,6 +80,11 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class FaqView(LoginRequiredMixin, CreateView):
+    model = Report
+    template_name = 'core/faq.html'
+    fields = ['username_to_report', 'details']
+
 def search_result(request):
     if request.method == 'POST':
         searched = request.POST.get('searched')
