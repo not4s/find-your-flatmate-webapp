@@ -1,19 +1,18 @@
-
-from multiprocessing import context
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView,
+    DeleteView
 )
 from .models import Post, Report
 from .filters import PostFilter
 
-# def index(request):
-#     return HttpResponse('<h1>Hello World!</h1>')
+def index(request):
+    return HttpResponse('<h1>Hello World!</h1>')
 
 def home(request):
     context = {
@@ -21,37 +20,6 @@ def home(request):
     }
     return render(request, 'core/home.html', context)
 
-def faq(request):
-    return render(request, 'core/faq.html')
-
-# def quiz(request):
-#     if request.method == 'POST':
-#         sleep = request.POST.get('sleep', None)
-#         cook = request.POST.get('cook', None)
-#         loner = request.POST.get('loner', None)
-
-#         print(sleep)
-#         print(cook)
-#         print(loner)
-
-#         quiz = Quiz.objects.create(
-#             sleep=sleep,
-#             cook=cook,
-#             loner=loner,
-#         )
-
-#         quiz.save()
-
-#         print(request.path)
-
-#         return redirect("home")
-    
-#     return render(request, 'core/quiz.html')
-
-
-# class QuizView(CreateView):
-#     model = Quiz
-#     fields = ['sleep', 'cook', 'loner']
 
 class PostListView(ListView):
     model = Post
@@ -80,7 +48,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'start_year', 'start_month', 'end_year', 'end_month', 'budget', 'location']
+    fields = ['title', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

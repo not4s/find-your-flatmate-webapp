@@ -1,9 +1,16 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
-from PIL import Image
+from django.urls import reverse
+from datetime import date
 
 
-class Profile(models.Model):
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
     location_choice = (
         ('Albertopolis', 'Albertopolis'),
         ('Bayswater', 'Bayswater'),
@@ -35,21 +42,30 @@ class Profile(models.Model):
         ('Fordham University', 'Fordham University'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    about_me = models.TextField(blank=True, null=True)
+    budget_choice = (
+        ('0-500', '£0-500'),
+        ('500-750', '£500-750'),
+        ('750-1000', '£750-1000'),
+        ('1000-1250', '£1000-1250'),
+        ('1250-1500', '£1250-1500'),
+        ('1500-1750', '£1500-1750'),
+        ('1750-2000', '£1750-2000'),
+        ('2000-3000', '£2000-3000'),
+        ('3000+', '£3000+')
+    )
+    
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
     search_location = models.CharField(max_length=30, blank=True, null=True, choices=location_choice)
     studies_at = models.CharField(max_length=30, blank=True, null=True, choices=studies_at_choice)
-    image = models.ImageField(default='default_profile.jpeg', upload_to='profile_pics')
+    budget = models.CharField(max_length=30, blank=True, null=True, choices=budget_choice)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.title
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'pk': self.pk})
 
-        img = Image.open(self.image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+class Report(models.Model):
+    username_to_report = models.CharField(max_length=100)
+    details = models.TextField()
