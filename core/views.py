@@ -39,7 +39,22 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'start_date', 'end_date', 'search_location', 'studies_at', 'budget']
+    fields = ['title',
+              'content',
+              'start_date',
+              'end_date', 
+              'search_location', 
+              'studies_at', 
+              'budget',
+              'what_time_do_you_go_to_sleep', 
+              'how_often_do_you_cook_per_week', 
+              'how_often_do_you_meet_friends_per_week',
+              'how_often_do_you_think_you_will_bring_other_people_into_the_flat',
+              'when_do_you_usually_return_to_the_flat',
+              'how_often_do_you_drink_alcohol',
+              'when_do_you_shower',
+              'how_often_do_you_shop_for_groceries',
+              'how_often_do_you_do_chores']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -48,7 +63,22 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title',
+              'content',
+              'start_date',
+              'end_date', 
+              'search_location', 
+              'studies_at', 
+              'budget',
+              'what_time_do_you_go_to_sleep', 
+              'how_often_do_you_cook_per_week', 
+              'how_often_do_you_meet_friends_per_week',
+              'how_often_do_you_think_you_will_bring_other_people_into_the_flat',
+              'when_do_you_usually_return_to_the_flat',
+              'how_often_do_you_drink_alcohol',
+              'when_do_you_shower',
+              'how_often_do_you_shop_for_groceries',
+              'how_often_do_you_do_chores']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -80,11 +110,6 @@ class ReportCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class FaqView(LoginRequiredMixin, CreateView):
-    model = Report
-    template_name = 'core/faq.html'
-    fields = ['username_to_report', 'details']
-
 def search_result(request):
     if request.method == 'POST':
         searched = request.POST.get('searched')
@@ -92,3 +117,39 @@ def search_result(request):
         return render(request, 'core/search_result.html', {'searched':searched, 'posts':posts})
     else:
         return render(request, 'core/search_result.html', {})
+
+def filter(request):
+    if request.method == "POST":
+        available = Post.objects.all()
+
+        try:
+            budget = int(request.POST["budget"])
+            available = Post.objects.filter(budget__lte=budget+100).filter(budget__gte=budget-100)
+        except:
+            pass
+
+        sleep = int(request.POST["what_time_do_you_go_to_sleep"])
+        if sleep != 0:
+            print("Available:\n" + str(available))
+            print("I'm filtering sleep")
+            available = available.filter(what_time_do_you_go_to_sleep=sleep)
+
+        cook = int(request.POST["how_often_do_you_cook_per_week"])
+        if cook != 0:
+            available = available.filter(how_often_do_you_cook_per_week=cook)
+
+        loner = int(request.POST["how_often_do_you_meet_friends_per_week"])
+        if loner != 0:
+            available = available.filter(how_often_do_you_meet_friends_per_week=loner)
+
+        context = {
+            'posts': available
+        }
+
+        return render(request, 'core/home.html', context)
+    return render(request, "core/filter_form.html")
+
+class FaqView(LoginRequiredMixin, CreateView):
+    model = Report
+    template_name = 'core/faq.html'
+    fields = ['username_to_report', 'details']

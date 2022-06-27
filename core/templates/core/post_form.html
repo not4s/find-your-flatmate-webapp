@@ -1,17 +1,92 @@
 {% extends "core/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Your Post</legend>
-                {{ form|crispy }}
-            </fieldset>
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Looking for...</legend>
 
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.title | as_crispy_field }}
+                </div>
             </div>
-        </form>
+            <div class="textbox">
+                {{ form.content | as_crispy_field }}
+            </div>
+
+            <legend class="border-bottom mb-4">Required Detail</legend>
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.start_date | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-6">
+                    {{ form.end_date | as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    {{ form.search_location | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-5">
+                    {{ form.studies_at | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-3">
+                    {{ form.budget | as_crispy_field }}
+                </div>
+            </div>
+
+            <legend class="border-bottom mb-4">Optional Detail</legend>
+            <i>
+                Our research indicates people tend to result in less conflicts,
+                <br/>when living with another person with a similar lifestyle.
+            </i>
+            <br/><br/>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.what_time_do_you_go_to_sleep | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-6">
+                    {{ form.how_often_do_you_cook_per_week | as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.how_often_do_you_think_you_will_bring_other_people_into_the_flat | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-6">
+                    {{ form.when_do_you_usually_return_to_the_flat | as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.how_often_do_you_drink_alcohol | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-6">
+                    {{ form.when_do_you_shower | as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    {{ form.how_often_do_you_shop_for_groceries | as_crispy_field }}
+                </div>
+                <div class="form-group col-sm-6">
+                    {{ form.how_often_do_you_do_chores | as_crispy_field }}
+                </div>
+            </div>
+
+
+
+        </fieldset>
+    </form><br />
+
+
+
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Post</button>
     </div>
+    </form>
+</div>
 {% endblock content %}

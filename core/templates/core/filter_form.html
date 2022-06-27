@@ -1,0 +1,170 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Your Search</legend>
+                {{ form|crispy }}
+            </fieldset>
+
+            <div class="form-group">
+                <label for="what_time_do_you_go_to_sleep" id="what_time_do_you_go_to_sleep-label">
+                    What time do you go to sleep?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="what_time_do_you_go_to_sleep" id="what_time_do_you_go_to_sleep-id">
+                    <option value=0>-------------</option>
+                    <option value=1>21:00</option>
+                    <option value=2>22:00</option>
+                    <option value=3>23:00</option>
+                    <option value=4>24:00+</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_cook_per_week" id="how_often_do_you_cook_per_week-label">
+                    How often do you cook per week?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_cook_per_week" id="how_often_do_you_cook_per_week-id">
+                    <option value=0>-------------</option>
+                    <option value=1>I don't cook</option>
+                    <option value=2>1-2 times a week</option>
+                    <option value=3>3-4 times per week</option>
+                    <option value=4>5+ times</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_meet_friends_per_week" id="how_often_do_you_meet_friends_per_week-label">
+                    How often do you meet your friends per week?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_meet_friends_per_week" id="how_often_do_you_meet_friends_per_week-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Never</option>
+                    <option value=2>Once per week</option>
+                    <option value=3>2-4 times per week</option>
+                    <option value=4>A lot</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_have_guests" id="how_often_do_you_have_guests-label">
+                    How often do you have guests
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_have_guests" id="how_often_do_you_have_guests-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Never</option>
+                    <option value=2>Once per month</option>
+                    <option value=3>Once per week</option>
+                    <option value=4>More than once per week</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="when_do_you_usually_return_to_the_flat" id="when_do_you_usually_return_to_the_flat-label">
+                    When do you usually return to the flat?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="when_do_you_usually_return_to_the_flat" id="when_do_you_usually_return_to_the_flat-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Afternoon</option>
+                    <option value=2>Evening</option>
+                    <option value=3>Late at night</option>
+                    <option value=4>Morning</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_drink_alcohol" id="how_often_do_you_drink_alcohol-label">
+                    How often do you drink alcohol?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_drink_alcohol" id="how_often_do_you_drink_alcohol-id">
+                    <option value=0>-------------</option>
+                    <option value=1>I don't drink</option>
+                    <option value=2>1-2 times per week</option>
+                    <option value=3>3-5 times per week</option>
+                    <option value=4>Everyday</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="when_do_you_shower" id="when_do_you_shower-label">
+                    When do you shower?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="when_do_you_shower" id="when_do_you_shower-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Morning</option>
+                    <option value=2>Noon</option>
+                    <option value=3>Evening</option>
+                    <option value=4>Right before bed</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_shop_for_groceries" id="how_often_do_you_shop_for_groceries-label">
+                    How often do you shop for groceries?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_shop_for_groceries" id="how_often_do_you_shop_for_groceries-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Once per week</option>
+                    <option value=2>2-3 times per week</option>
+                    <option value=3>4-5 times per week</option>
+                    <option value=4>Every day</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="how_often_do_you_do_chores" id="how_often_do_you_do_chores-label">
+                    How often do you do chores?
+                </label>
+            </div>
+
+            <div class="form-group">
+                <select name="how_often_do_you_do_chores" id="how_often_do_you_do_chores-id">
+                    <option value=0>-------------</option>
+                    <option value=1>Once per week</option>
+                    <option value=2>2-3 times per week</option>
+                    <option value=3>4-5 times per week</option>
+                    <option value=4>Every day</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
