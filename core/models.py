@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import date
 
+class PostManager(models.Manager):
+    def ordered_by_diff(self, request):
+        qs = self.get_queryset()
+        return sorted(qs, key=lambda x: post_difference(request, x))
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -87,12 +93,12 @@ class Post(models.Model):
         (4, "Morning")
     )
 
-    shower_choice = (
-        (1, "Morning"),
-        (2, "Noon"),
-        (3, "Evening"),
-        (4, "Right before bed")
-    )
+    # shower_choice = (
+    #     (1, "Morning"),
+    #     (2, "Noon"),
+    #     (3, "Evening"),
+    #     (4, "Right before bed")
+    # )
 
     groceries_choice = (
         (1, "Once per week"),
@@ -101,12 +107,12 @@ class Post(models.Model):
         (4, "Basically every day")
     )
 
-    alcohol_choice = (
-        (1, "I don't drink"),
-        (2, "1-2 times per week"),
-        (3, "4-5 times per week"),
-        (4, "Basically every day")
-    )
+    # alcohol_choice = (
+    #     (1, "I don't drink"),
+    #     (2, "1-2 times per week"),
+    #     (3, "4-5 times per week"),
+    #     (4, "Basically every day")
+    # )
     
     start_date = models.DateField(default=date.today)
     end_date = models.DateField(default=date.today)
@@ -117,19 +123,32 @@ class Post(models.Model):
     what_time_do_you_go_to_sleep = models.IntegerField(choices=sleep_choice, blank=True, null=True)
     how_often_do_you_cook_per_week = models.IntegerField(choices=cook_choice, blank=True, null=True)
     how_often_do_you_meet_friends_per_week = models.IntegerField(choices=loner_choice, blank=True, null=True)
-    how_often_do_you_think_you_will_bring_other_people_into_the_flat = models.IntegerField(choices=visit_choice, blank=True, null=True)
+    how_often_do_you_have_guests = models.IntegerField(choices=visit_choice, blank=True, null=True)
     when_do_you_usually_return_to_the_flat = models.IntegerField(choices=back_choice, blank=True, null=True)
-    how_often_do_you_drink_alcohol = models.IntegerField(choices=alcohol_choice, blank=True, null=True)
+    # how_often_do_you_drink_alcohol = models.IntegerField(choices=alcohol_choice, blank=True, null=True)
     
-    when_do_you_shower = models.IntegerField(choices=shower_choice, blank=True, null=True)
+    # when_do_you_shower = models.IntegerField(choices=shower_choice, blank=True, null=True)
     how_often_do_you_shop_for_groceries = models.IntegerField(choices=groceries_choice, blank=True, null=True)
-    how_often_do_you_do_chores = models.IntegerField(choices=groceries_choice, blank=True, null=True)
+    # how_often_do_you_do_chores = models.IntegerField(choices=groceries_choice, blank=True, null=True)
+
+    objects = PostManager()
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+def post_difference(request, post):
+    difference = 0
+    difference += abs(int(post.what_time_do_you_go_to_sleep) - int(request.POST['what_time_do_you_go_to_sleep']))
+    difference += abs(int(post.how_often_do_you_cook_per_week) - int(request.POST['how_often_do_you_cook_per_week']))
+    difference += abs(int(post.how_often_do_you_meet_friends_per_week) - int(request.POST['how_often_do_you_meet_friends_per_week']))
+    difference += abs(int(post.how_often_do_you_have_guests) - int(request.POST['how_often_do_you_have_guests']))
+    difference += abs(int(post.when_do_you_usually_return_to_the_flat) - int(request.POST['when_do_you_usually_return_to_the_flat']))
+    difference += abs(int(post.how_often_do_you_shop_for_groceries) - int(request.POST['how_often_do_you_shop_for_groceries']))
+
+    return difference
 
 class Report(models.Model):
     username_to_report = models.CharField(max_length=100)

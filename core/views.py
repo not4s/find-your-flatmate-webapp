@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -49,12 +49,13 @@ class PostCreateView(LoginRequiredMixin, CreateView):
               'what_time_do_you_go_to_sleep', 
               'how_often_do_you_cook_per_week', 
               'how_often_do_you_meet_friends_per_week',
-              'how_often_do_you_think_you_will_bring_other_people_into_the_flat',
+              'how_often_do_you_have_guests',
               'when_do_you_usually_return_to_the_flat',
-              'how_often_do_you_drink_alcohol',
-              'when_do_you_shower',
+            #   'how_often_do_you_drink_alcohol',
+            #   'when_do_you_shower',
               'how_often_do_you_shop_for_groceries',
-              'how_often_do_you_do_chores']
+            #   'how_often_do_you_do_chores'
+              ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -73,12 +74,13 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
               'what_time_do_you_go_to_sleep', 
               'how_often_do_you_cook_per_week', 
               'how_often_do_you_meet_friends_per_week',
-              'how_often_do_you_think_you_will_bring_other_people_into_the_flat',
+              'how_often_do_you_have_guests',
               'when_do_you_usually_return_to_the_flat',
-              'how_often_do_you_drink_alcohol',
-              'when_do_you_shower',
+            #   'how_often_do_you_drink_alcohol',
+            #   'when_do_you_shower',
               'how_often_do_you_shop_for_groceries',
-              'how_often_do_you_do_chores']
+            #   'how_often_do_you_do_chores'
+              ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -120,34 +122,19 @@ def search_result(request):
 
 def filter(request):
     if request.method == "POST":
-        available = Post.objects.all()
+        available = Post.objects.ordered_by_diff(request)
 
-        try:
-            budget = int(request.POST["budget"])
-            available = Post.objects.filter(budget__lte=budget+100).filter(budget__gte=budget-100)
-        except:
-            pass
-
-        sleep = int(request.POST["what_time_do_you_go_to_sleep"])
-        if sleep != 0:
-            print("Available:\n" + str(available))
-            print("I'm filtering sleep")
-            available = available.filter(what_time_do_you_go_to_sleep=sleep)
-
-        cook = int(request.POST["how_often_do_you_cook_per_week"])
-        if cook != 0:
-            available = available.filter(how_often_do_you_cook_per_week=cook)
-
-        loner = int(request.POST["how_often_do_you_meet_friends_per_week"])
-        if loner != 0:
-            available = available.filter(how_often_do_you_meet_friends_per_week=loner)
+        fil = PostFilter(request.GET)
 
         context = {
-            'posts': available
+            'posts': available,
+            'filter': fil
         }
 
         return render(request, 'core/home.html', context)
     return render(request, "core/filter_form.html")
+
+
 
 class FaqView(LoginRequiredMixin, CreateView):
     model = Report
