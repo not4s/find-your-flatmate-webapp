@@ -13,8 +13,8 @@ ul {
   margin: 0;
 }
 
-.bg-steel {
-  background-color: #4da52f !important;
+.bg-primary {
+  background-color: #1567a5 !important;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -31,10 +31,21 @@ ul {
 
 .content-section {
   background: #ffffff;
-  padding: 10px 20px;
+  padding: 10px 50px;
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+  margin-left: auto;
+}
+
+.content-section2 {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .article-title {
@@ -82,4 +93,10 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+.btn-custom {
+  background-color: #1567a5;
+  color: white;
+  opacity: 0.5;
 }
