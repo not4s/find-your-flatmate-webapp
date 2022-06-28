@@ -1,0 +1,112 @@
+.home-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #eaddd1;
+}
+.home-text {
+  top: 270px;
+  left: 181px;
+  color: #021850;
+  width: 443px;
+  position: absolute;
+  border-radius: var(--dl-radius-radius-round);
+  background-color: #d2ddf1;
+}
+.home-link {
+  top: 85px;
+  color: var(--dl-color-gray-white);
+  right: 109.20008087158203px;
+  display: flex;
+  position: absolute;
+  border-radius: var(--dl-radius-radius-radius8);
+  text-decoration: none;
+  background-color: var(--dl-color-primary-300);
+}
+.home-link1 {
+  top: 86px;
+  left: 1463px;
+  color: var(--dl-color-gray-black);
+  width: 164px;
+  height: 70px;
+  position: absolute;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--dl-radius-radius-radius8);
+  text-decoration: none;
+  background-color: transparent;
+}
+.home-button {
+  top: 93px;
+  left: 94px;
+  color: var(--dl-color-primary-300);
+  width: 118px;
+  height: 42px;
+  position: absolute;
+  border-width: 0px;
+  padding-right: 0px;
+  background-color: transparent;
+}
+.home-link2 {
+  top: 750px;
+  left: 200px;
+  color: var(--dl-color-primary-100);
+  width: 299px;
+  height: 48px;
+  position: absolute;
+  font-size: 24px;
+  text-align: center;
+  font-family: Roboto;
+  font-weight: 500;
+  padding-top: var(--dl-space-space-halfunit);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--dl-radius-radius-radius8);
+  text-transform: none;
+  text-decoration:   none;
+  background-color: var(--dl-color-gray-900);
+}
+.home-button1 {
+  top: 655px;
+  left: 201px;
+  color: var(--dl-color-gray-white);
+  width: 299px;
+  height: 46px;
+  margin: 0px;
+  display: flex;
+  z-index: 100;
+  position: absolute;
+  font-size: 30px;
+  box-shadow: 5px 5px 10px 0px #d4d4d4;
+  font-family: Roboto;
+  font-weight: 500;
+  padding-top: var(--dl-space-space-halfunit);
+  padding-left: 0px;
+  border-radius: var(--dl-radius-radius-radius8);
+  padding-right: 0px;
+  padding-bottom: var(--dl-space-space-halfunit);
+  text-transform: none;
+  text-decoration: none;
+  background-color: var(--dl-color-primary-300);
+}
+.home-link3 {
+  top: 9px;
+  left: 54px;
+  position: absolute;
+  text-align: right;
+  text-decoration: none;
+}
+.home-image {
+  top: 238px;
+  left: 1077px;
+  width: 467px;
+  height: 467px;
+  position: absolute;
+  object-fit: cover;
+  border-radius: var(--dl-radius-radius-radius8);
+}

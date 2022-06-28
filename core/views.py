@@ -12,7 +12,7 @@ from .models import Post, Report
 from .filters import PostFilter
 
 def index(request):
-    return HttpResponse('<h1>Hello World!</h1>')
+    return render(request, 'core/index.html')
 
 def home(request):
     context = {
