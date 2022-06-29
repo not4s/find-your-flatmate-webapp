@@ -1,15 +1,17 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.db.models import Q
 from django.urls import reverse
 from datetime import date
+
+User = get_user_model()
 
 class PostManager(models.Manager):
     def ordered_by_diff(self, request):
         qs = self.get_queryset()
         return sorted(qs, key=lambda x: post_difference(request, x))
-
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -153,3 +155,29 @@ def post_difference(request, post):
 class Report(models.Model):
     username_to_report = models.CharField(max_length=100)
     details = models.TextField()
+
+class ThreadManager(models.Manager):
+    def by_user(self, **kwargs):
+        user = kwargs.get('user')
+        lookup = Q(first_person=user) | Q(second_person=user)
+        qs = self.get_queryset().filter(lookup).distinct()
+        return qs
+
+
+class Thread(models.Model):
+    first_person = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='thread_first_person')
+    second_person = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
+                                     related_name='thread_second_person')
+    updated = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = ThreadManager()
+    class Meta:
+        unique_together = ['first_person', 'second_person']
+
+
+class ChatMessage(models.Model):
+    thread = models.ForeignKey(Thread, null=True, blank=True, on_delete=models.CASCADE, related_name='chatmessage_thread')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)

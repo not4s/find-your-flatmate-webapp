@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_filters',
     'widget_tweaks',
     'jquery',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'flatmate_finder.wsgi.application'
+# WSGI_APPLICATION = 'flatmate_finder.wsgi.application'
+ASGI_APPLICATION = 'flatmate_finder.asgi.application'
 
 
 # Database
@@ -143,3 +145,14 @@ LOGIN_URL = 'login'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        # 'CONFIG': {
+        #     'hosts': [('127.0.0.1', 6379)],
+        # }
+    }
+}

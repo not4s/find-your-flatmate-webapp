@@ -4,41 +4,9 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    location_choice = (
-        ('Albertopolis', 'Albertopolis'),
-        ('Bayswater', 'Bayswater'),
-        ('Belgravia', 'Belgravia'),
-        ('Brompton', 'Brompton'),
-        ('Chelsea', 'Chelsea'),
-        ('Chelsea Harbour', 'Chelsea Harbour'),
-        ('Earls Court', 'Earls Court'),
-        ('Holland Park', 'Holland Park'),
-        ('Kensal Green', 'Kensal Green'),
-        ('Kensington', 'Kensington'),
-        ('Knightsbridge', 'Knightsbridge'),
-        ('Ladbroke Grove', 'Ladbroke Grove'),
-        ('North Kensington', 'North Kensington'),
-        ('Notting Hill', 'Notting Hill'),
-        ('South Kensington', 'South Kensington'),
-        ('West Brompton', 'West Brompton'),
-        ('West Kensington', 'West Kensington'),
-        ('Worlds End', 'Worlds End'),
-    )
-
-    studies_at_choice = (
-        ('English National Ballet School', 'English National Ballet School'),
-        ('Royal College of Art', 'Royal College of Art'),
-        ('Royal College of Music', 'Royal College of Music'),
-        ('Imperial College London', 'Imperial College London'),
-        ('Heythrop College', 'Heythrop College'),
-        ('Richmond', 'Richmond'),
-        ('Fordham University', 'Fordham University'),
-    )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about_me = models.TextField(blank=True, null=True)
-    search_location = models.CharField(max_length=30, blank=True, null=True, choices=location_choice)
-    studies_at = models.CharField(max_length=30, blank=True, null=True, choices=studies_at_choice)
     image = models.ImageField(default='default_profile.jpeg', upload_to='profile_pics')
 
     def __str__(self):

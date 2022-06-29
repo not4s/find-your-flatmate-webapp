@@ -18,8 +18,9 @@
       From <b>{{ object.start_date }}</b> to <b>{{ object.end_date }}</b>
       Searching for places in <b>{{ object.search_location }}</b>
       Currently studying at <b>{{ object.studies_at }}</b>
-      Budget is <b>£{{ object.budget }}</b>
-      
+      Budget is <b>£{{ object.budget }}</b><br/><br/>
+      <button type="submit" id="chat-link" href="{% url 'profile' %}" class="btn btn-custom2 btn-sm btn-block">View Profile</a>
+      <button type="submit" id="chat-link" href="{% url 'chat' %}" class="btn btn-custom2 btn-sm btn-block">Message</a>
     </div>
   </article>
 {% endblock content %}
